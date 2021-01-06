@@ -1,21 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// In App.js in a new project
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import React from "react";
+import { View, Text, Button, StyleSheet } from "react-native";
+import { createDrawerNavigator, createAppContainer } from "react-navigation";
+class HomeScreen extends React.Component {
+  render() {
+    return (
+      <View  style={{
+        alignItems: "right"
+        }}>
+        <Button title="Go To Settings"onPress={this.props.navigation.openDrawer}></Button>
+           
+      </View>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+class SettingsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{
+        alignItems: "right"}} >
+        <Button title="Go To Home" onPress={this.props.navigation.openDrawer}></Button>
+      </View>
+    );
+  }
+}
+
+
+
+const DrawerNavigator = createDrawerNavigator({
+  Home: HomeScreen,
+  Settings: SettingsScreen,
 });
+
+
+
+const AppContainer = createAppContainer(DrawerNavigator);
+
+export class App extends React.Component {
+  render() {
+    return <AppContainer />;
+  }
+}
+
+export default App;
